@@ -45,7 +45,7 @@ Q2.1
 VInt getVectorAtLine (const unsigned & linenum) const 
 { 
 
-              VInt LineSearch(_size()); 
+              VInt LineSearch; 
               for(std::shared_ptr <CNode<triplet>> ptr(matrix->fictionalHead()->GetNextNode ());ptr;ptr = ptr->GetNextNode()) 
               { 
                             if(ptr->GetData().lineNum == linenum) 
@@ -62,7 +62,7 @@ Q2.2
 VInt getVectorAtCol (const unsigned & colNum) const 
 { 
 
-              VInt ColSearch(_size()); 
+              VInt ColSearch; 
               for(std::shared_ptr <CNode<triplet>> ptr(matrix->fictionalHead()->GetNextNode ());ptr;ptr = ptr->getNextNode()) 
               { 
 
