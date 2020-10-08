@@ -1,5 +1,190 @@
- 
+Q1.1
 
-4.3 cmatrix3 paramètre 8 
+Nullptr -> 0,0,1 -> 0,9,2 -> 5,4,-1 -> 9,9,9 -> Nullptr
+                 <-       <-        <-      
+Q1.2
 
-    Cmatrix3 paramètre 9 
+0,1 -> 9,2 -> 50,-1 -> 99,9
+
+Q1.3
+
+Matrice 1 : 800 octets
+Matrice 2 : 160 octets
+Matrice 3 : 96 octets
+
+Q1.4
+
+1.
+
+Matrice 1 : 800 octets
+Matrice 2 : 160 octets
+Matrice 3 : 96 octets
+
+2.
+
+Matrice 1 : 800 octets 
+Matrice 2 : 80 octets
+Matrice 3 : 48 octets
+
+Q1.5
+
+1.
+
+Matrice 1 : 8000 octets
+Matrice 2 : 160 octets
+Matrice 3 : 96 octets
+
+2.
+
+Matrice 1 : 8000 octets
+Matrice 2 : 160 octets
+Matrice 3 : 96 octets
+
+Q2.1
+
+VInt getVectorAtLine (const unsigned & linenum) const 
+{ 
+
+              VInt LineSearch; 
+              for(std::shared_ptr <CNode<triplet>> ptr(matrix->fictionalHead()->GetNextNode ());ptr;ptr = ptr->GetNextNode()) 
+              { 
+                            if(ptr->GetData().lineNum == linenum) 
+                            { 
+                                          LineSearch.push_back(ptr->GetData().val);
+                            } 
+              } 
+
+              return LineSearch;
+} 
+
+Q2.2
+
+VInt getVectorAtCol (const unsigned & colNum) const 
+{ 
+
+              VInt ColSearch; 
+              for(std::shared_ptr <CNode<triplet>> ptr(matrix->fictionalHead()->GetNextNode ());ptr;ptr = ptr->getNextNode()) 
+              { 
+
+                            if(ptr->GetData().colNum == colNum) 
+                            {
+                                          ColSearch.push_back(ptr->GetData().val);
+                            } 
+              }
+              return ColSearch;
+}
+
+Q2.3
+
+int getValue(const unsigned & lineNum, const unsigned & colNum) const 
+{ 
+              std::shared_ptr <CNode<triplet>> ptr(matrix->fictionalHead()->GetNextNode ()) 
+              for(;(ptr->GetData().lineNum != lineNum && Ptr->GetData().colNum) || ptr ;ptr = ptr->getNextNode()); 
+              if(ptr)
+                            return 0;
+              if(!ptr)
+                            return ptr->GetData().val; 
+} 
+
+Q2.4
+_size représente la taille de la matrice (la taille de la CList) et qu’on utilise un type de size_t étant donné qu’il faut mieux utiliser un size_t plutôt qu’un int.
+On utilise _size en donnée-membre pour pouvoir l’utiliser uniquement nos méthodes de classe.
+
+Q3.1
+VInt getVectorAtLine (const unsigned & linenum) const 
+{ 
+
+              VInt LineSearch; 
+              for(size_t i = 0;i != matrix.size()-1;i++)
+              { 
+
+                            int Nombredefois = 0; 
+                            std::shared_ptr <CNode<pair<size_t,int>>> ptr(matrix[i]); 
+                            for(unsigned i = ptr->GetData().first;i >= 9;i = i – 9)
+                            { 
+
+                                          Nombredefois = nombredefois + 1; 
+
+                            }
+                            if(Nombredefois == linenum)
+                            { 
+                                          LineSearch.push_back(ptr->GetData().second);
+                            } 
+
+              }
+              return LineSearch;
+}
+
+Q3.2
+VInt getVectorAtCol (const unsigned & colNum) const
+{              
+              VInt ColSearch; 
+              for(size_t i = 0;i != matrix.size()-1; i++) 
+              { 
+
+                            std::shared_ptr <CNode<pair<size_t,int>>> ptr(matrix[i])
+                            int i = ptr->GetData().first;
+                            if(i % colNum == 0) 
+                            {
+                                          ColSearch.push_back(ptr->GetData().second); 
+                            } 
+
+              } 
+              return ColSearch; 
+} 
+
+Q3.3
+int getValue (const unsigned & lineNum, const unsigned & colNum) const
+{
+              int val = 0;
+              for(size_t i = 0;i != matrix.size()-1;i++)
+              { 
+                            int Nombredefois = 0; 
+                            std::shared_ptr <CNode<pair<size_t,int>>> ptr(matrix[i]); 
+                            for(unsigned i = ptr->GetData().first;i >= 9;i = i – 9) 
+                            { 
+                                          Nombredefois = nombredefois + 1; 
+                            } 
+                            if(Nombredefois == linenum) 
+                            { 
+                                          if(ptr->GetData().first % colNum == 0)
+                                          { 
+                                                        val = ptr->GetData().second;
+                                          }
+                            }
+              } 
+              return val;
+} 
+
+Q4.1
+cmatrix2 paramètre 0 
+cmatrix2 paramètre 1 
+
+Q4.2
+Pour le paramètre 0, on choisit la matrice 2 car celle-ci fait moins d’opérations étant donné qu’on a accès à la colonne et la ligne alors que dans la matrice 3
+on doit calculer nous-même la ligne.
+Pour le paramètre 1, on choisit la matrice 2 car celle-ci fait moins d’opérations étant donné qu’on a accès à la colonne et la ligne alors que dans la matrice 3
+on doit calculer nous-même la ligne.
+
+Q4.3 
+Pour les paramètres 8 et 9, il est préférable d’utiliser la matrice 2, car on parcourt directement une liste chainée pour ensuite comparer la valeur à la valeur du triplet
+de la case. Alors que dans la matrice 3, on doit parcourir le vector et utiliser un pointeur de type CNode pour pouvoir pointer chaque case de la CList et ensuite effectuer
+les calculs.   
+
+Q4.4
+La matrice 2 est nettement plus courte que la matrice 3 pour le paramètre 8 et 9 grâce à sa structure triplet, et au fait que ça soit juste une liste chainée et pas un 
+vector de liste chainée.
+
+Q4.5
+Pour les paramètres 0,0 ; 1,1 ; 9,9 , la matrice 2 serait plus optimisé
+
+Q4.6
+Pour les opérations car dans la fonction GetValue(), on effectue un parcours de la liste,
+et on compare les valeurs de la structure triplet, tandis que dans la matrice 3 on doit parcourir le vector, et utiliser un pointeur pour parcourir la liste chainée,
+en plus de devoir faire des calculs pour la ligne. 
+
+Q4.7
+Clist<pair<unsigned, CList<pairColVal>>>
+
+Q4.8
+Clist d’une pair où unsigned est lineNum et la Clist de pair size_t est ColNum et int est val. 
